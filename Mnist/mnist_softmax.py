@@ -7,6 +7,7 @@ TRAINING_STEPS = 10000
 BATCH_SIZE = 100
 # 滑动平均衰减率
 MOVING_AVERAGE_DECAY = 0.99
+LEARNING_RATE = 0.05
 
 
 def train(mnist):
@@ -17,7 +18,7 @@ def train(mnist):
 
     y_ = tf.placeholder(tf.float32, [None, OUTPUT_NODE])
     cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=y, labels=y_))
-    train_step = tf.train.GradientDescentOptimizer(0.05).minimize(cross_entropy)
+    train_step = tf.train.GradientDescentOptimizer(LEARNING_RATE).minimize(cross_entropy)
 
     with tf.Session() as sess:
         tf.global_variables_initializer().run()
